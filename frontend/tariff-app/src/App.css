@@ -1,0 +1,269 @@
+/* App.css */
+.app {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.main-content {
+  margin-top: 20px;
+}
+
+/* AirtableGrid styles */
+.airtable-grid {
+  margin: 20px 0;
+}
+
+.grid-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.forms-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.forms-button:hover {
+  background-color: #0056b3;
+}
+
+.grid-container {
+  overflow-x: auto;
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid #ddd;
+}
+
+.data-table th,
+.data-table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+
+.data-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+.data-table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.cell {
+  position: relative;
+  cursor: pointer;
+}
+
+.cell:hover {
+  background-color: #e3f2fd;
+}
+
+.hts-code-cell {
+  background-color: #fff3e0;
+  font-weight: bold;
+}
+
+/* RAGPanel styles */
+.rag-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  overflow-y: auto;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #ddd;
+  background-color: #f8f9fa;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #666;
+}
+
+.close-btn:hover {
+  color: #000;
+}
+
+.panel-content {
+  padding: 20px;
+}
+
+.selected-cell-info {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.suggested-questions {
+  margin-bottom: 20px;
+}
+
+.suggested-questions h4 {
+  margin-bottom: 10px;
+}
+
+.suggested-question {
+  display: block;
+  width: 100%;
+  margin: 5px 0;
+  padding: 8px 12px;
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.suggested-question:hover {
+  background-color: #bbdefb;
+}
+
+.chat-interface {
+  margin-top: 20px;
+}
+
+.chat-interface form {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.chat-interface input {
+  flex: 1;
+  padding: 8px 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+}
+
+.chat-interface button {
+  padding: 8px 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.chat-interface button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.loading {
+  color: #666;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+.answer {
+  margin-top: 15px;
+  padding: 10px;
+  background-color: #f0f8ff;
+  border-left: 4px solid #007bff;
+  border-radius: 5px;
+}
+
+/* FormsSelector styles */
+.forms-selector {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  padding: 20px;
+}
+
+.selected-data-info {
+  margin-bottom: 20px;
+  padding: 10px;
+  background-color: #f8f9fa;
+  border-radius: 5px;
+}
+
+.forms-list h4 {
+  margin-bottom: 15px;
+}
+
+.form-option {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.form-option:hover {
+  background-color: #e9ecef;
+  border-color: #adb5bd;
+}
+
+/* CellActions styles */
+.cell-actions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+}
+
+.cell-actions button {
+  padding: 8px 12px;
+  background: none;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  border-bottom: 1px solid #eee;
+}
+
+.cell-actions button:last-child {
+  border-bottom: none;
+}
+
+.cell-actions button:hover {
+  background-color: #f5f5f5;
+}
