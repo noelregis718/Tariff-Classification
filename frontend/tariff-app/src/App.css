@@ -20,6 +20,63 @@
   margin-bottom: 20px;
 }
 
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.toast-test-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.toast-test-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.toast-test-btn.success {
+  background-color: #28a745;
+  color: white;
+}
+
+.toast-test-btn.success:hover {
+  background-color: #218838;
+}
+
+.toast-test-btn.error {
+  background-color: #dc3545;
+  color: white;
+}
+
+.toast-test-btn.error:hover {
+  background-color: #c82333;
+}
+
+.toast-test-btn.warning {
+  background-color: #ffc107;
+  color: #212529;
+}
+
+.toast-test-btn.warning:hover {
+  background-color: #e0a800;
+}
+
+.toast-test-btn.info {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.toast-test-btn.info:hover {
+  background-color: #138496;
+}
+
 .forms-button {
   padding: 10px 20px;
   background-color: #007bff;
@@ -33,14 +90,77 @@
   background-color: #0056b3;
 }
 
-.grid-container {
-  overflow-x: auto;
+/* Error Banner - shows above table without breaking layout */
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 16px;
+  background-color: #f8d7da;
+  border: 1px solid #f5c6cb;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  color: #721c24;
 }
 
+.error-banner .error-icon {
+  font-size: 20px;
+  flex-shrink: 0;
+}
+
+.error-banner .error-message {
+  flex: 1;
+  font-size: 14px;
+}
+
+.error-banner .retry-button {
+  padding: 6px 12px;
+  background-color: #dc3545;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  flex-shrink: 0;
+}
+
+.error-banner .retry-button:hover {
+  background-color: #c82333;
+}
+
+/* Scroll Indicator */
+.scroll-indicator {
+  text-align: center;
+  padding: 8px 16px;
+  background-color: #e3f2fd;
+  border: 1px solid #bbdefb;
+  border-radius: 6px;
+  margin-bottom: 16px;
+  color: #1976d2;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.scroll-indicator span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+.grid-container {
+  overflow-x: auto;   /* Horizontal scrolling */
+  overflow-y: auto;   /* Vertical scrolling (if needed) */
+  max-width: 100%;    /* Prevent overflow of the page */
+  max-height: 70vh;   /* Optional: to prevent it from taking full screen height */
+  white-space: nowrap; /* Prevents columns from wrapping */
+}
+
+/* Table - Force scrolling behavior */
 .data-table {
-  width: 100%;
+  width: max-content; /* Expands to fit all columns */
+  min-width: 100%;    /* Ensures it doesn't collapse */
   border-collapse: collapse;
-  border: 1px solid #ddd;
 }
 
 .data-table th,
@@ -48,11 +168,27 @@
   border: 1px solid #ddd;
   padding: 8px;
   text-align: left;
+  overflow: hidden;
+  word-wrap: break-word;
+  vertical-align: top;
+  white-space: normal;
 }
+
+/* Set specific column widths */
+.data-table th:nth-child(1), .data-table td:nth-child(1) { width: 12%; }
+.data-table th:nth-child(2), .data-table td:nth-child(2) { width: 25%; }
+.data-table th:nth-child(3), .data-table td:nth-child(3) { width: 15%; }
+.data-table th:nth-child(4), .data-table td:nth-child(4) { width: 20%; }
+.data-table th:nth-child(5), .data-table td:nth-child(5) { width: 15%; }
+.data-table th:nth-child(6), .data-table td:nth-child(6) { width: 13%; }
 
 .data-table th {
   background-color: #f2f2f2;
   font-weight: bold;
+  white-space: nowrap;
+  position: sticky;
+  top: 0;
+  z-index: 10;
 }
 
 .data-table tr:nth-child(even) {
@@ -62,6 +198,8 @@
 .cell {
   position: relative;
   cursor: pointer;
+  min-height: 40px;
+  max-height: 80px;
 }
 
 .cell:hover {
@@ -71,6 +209,90 @@
 .hts-code-cell {
   background-color: #fff3e0;
   font-weight: bold;
+}
+
+/* No data cell styling */
+.no-data-cell {
+  text-align: center;
+  padding: 40px 20px;
+  color: #6c757d;
+  font-style: italic;
+  background-color: #f8f9fa;
+}
+
+/* Loading and Error States */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.loading-spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.error-icon {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+
+.error-message h3 {
+  color: #dc3545;
+  margin-bottom: 10px;
+}
+
+.error-message p {
+  color: #6c757d;
+  margin-bottom: 20px;
+}
+
+.retry-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.retry-button:hover {
+  background-color: #0056b3;
+}
+
+/* Error cell styling */
+.error-cell {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.error-content {
+  font-size: 12px;
+  font-weight: bold;
+  text-align: center;
 }
 
 /* RAGPanel styles */
@@ -236,7 +458,7 @@
   border-color: #adb5bd;
 }
 
-/* CellActions styles */
+/* CellActions styles - Fixed positioning to ensure visibility */
 .cell-actions {
   position: absolute;
   top: 100%;
@@ -244,11 +466,12 @@
   background: white;
   border: 1px solid #ddd;
   border-radius: 5px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
   display: flex;
   flex-direction: column;
   min-width: 120px;
+  margin-top: 2px;
 }
 
 .cell-actions button {
@@ -258,6 +481,7 @@
   text-align: left;
   cursor: pointer;
   border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
 }
 
 .cell-actions button:last-child {
@@ -294,13 +518,6 @@
 
 .forms-button:hover {
   background: #0056b3;
-}
-
-.grid-container {
-  background: white;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .data-table {
@@ -346,40 +563,85 @@
   padding: 2px 4px;
   border-radius: 3px;
   transition: background-color 0.2s;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
 }
 
 .editable-cell:hover {
   background-color: #e9ecef;
 }
 
+.cell-content {
+  width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  line-height: 1.4;
+  max-height: 60px;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
 .editable-cell-input {
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   gap: 5px;
+  width: 100%;
+  min-height: 60px;
 }
 
 .cell-input {
   flex: 1;
-  padding: 4px 8px;
+  padding: 8px 12px;
   border: 2px solid #007bff;
   border-radius: 4px;
   font-size: 14px;
   outline: none;
+  min-width: 0;
+  min-height: 60px;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.4;
+  overflow-y: auto;
+}
+
+.cell-input.error {
+  border-color: #dc3545;
+}
+
+.input-error {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: #dc3545;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 1000;
 }
 
 .cell-actions {
   display: flex;
   gap: 2px;
+  flex-shrink: 0;
+  flex-direction: column;
+  align-items: center;
 }
 
 .save-btn, .cancel-btn {
-  padding: 2px 6px;
+  padding: 6px 12px;
   border: none;
-  border-radius: 3px;
+  border-radius: 4px;
   cursor: pointer;
   font-size: 12px;
   font-weight: bold;
+  min-width: 40px;
 }
 
 .save-btn {
@@ -467,11 +729,51 @@
   
   .data-table {
     font-size: 12px;
+    min-width: 800px !important;
   }
   
   .data-table th,
   .data-table td {
     padding: 6px 4px;
+  }
+  
+  .cell-content {
+    -webkit-line-clamp: 2;
+    max-height: 40px;
+  }
+  
+  .header-actions {
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end;
+  }
+  
+  .toast-test-buttons {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+  
+  .error-banner {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .error-banner .retry-button {
+    align-self: stretch;
+  }
+  
+  .cell-input {
+    min-height: 50px;
+  }
+  
+  .editable-cell-input {
+    min-height: 50px;
+  }
+  
+  .scroll-indicator {
+    font-size: 12px;
+    padding: 6px 12px;
   }
 }
 

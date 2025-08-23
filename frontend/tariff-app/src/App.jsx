@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import AirtableGrid from './components/AirtableGrid/AirtableGrid';
 import RagPanel from './components/RagPanel/RagPanel';
 import FormsSelector from './components/FormsSelector/FormsSelector';
+import ToastContainer from './components/Toast/ToastContainer';
 import './App.css';
 
 function App() {
@@ -33,37 +34,40 @@ function App() {
   };
 
   return (
-    <div className="app">
-      <div className="app-header">
-        <h1>Tariff Classification Assistant</h1>
-        <p>Interactive Airtable with AI-powered insights</p>
+    <>
+      <ToastContainer />
+      <div className="app">
+        <div className="app-header">
+          <h1>Tariff Classification Assistant</h1>
+          <p>Interactive Airtable with AI-powered insights</p>
+        </div>
+        
+        <div className="main-content">
+          <AirtableGrid 
+            onCellSelect={setSelectedCell}
+            onQuestionClick={handleQuestionClick}
+            onAutofillClick={handleAutofillClick}
+            onFormSelect={() => setShowFormsSelector(true)}
+          />
+        </div>
+        
+        {showRAGPanel && (
+          <RagPanel 
+            isOpen={showRAGPanel}
+            selectedCell={selectedCell}
+            onClose={handleRAGPanelClose}
+            onQuestionSubmit={handleQuestionSubmit}
+          />
+        )}
+        
+        {showFormsSelector && (
+          <FormsSelector
+            selectedData={selectedCell}
+            onClose={() => setShowFormsSelector(false)}
+          />
+        )}
       </div>
-      
-      <div className="main-content">
-        <AirtableGrid 
-          onCellSelect={setSelectedCell}
-          onQuestionClick={handleQuestionClick}
-          onAutofillClick={handleAutofillClick}
-          onFormSelect={() => setShowFormsSelector(true)}
-        />
-      </div>
-      
-      {showRAGPanel && (
-        <RagPanel 
-          isOpen={showRAGPanel}
-          selectedCell={selectedCell}
-          onClose={handleRAGPanelClose}
-          onQuestionSubmit={handleQuestionSubmit}
-        />
-      )}
-      
-      {showFormsSelector && (
-        <FormsSelector
-          selectedData={selectedCell}
-          onClose={() => setShowFormsSelector(false)}
-        />
-      )}
-    </div>
+    </>
   );
 }
 
