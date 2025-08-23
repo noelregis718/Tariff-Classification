@@ -1,4 +1,4 @@
-const AIRTABLE_API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+const AIRTABLE_API_BASE = import.meta.env.VITE_API_URL;
 
 class AirtableService {
   async getRecords() {
