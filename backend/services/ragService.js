@@ -26,7 +26,7 @@ class RAGService {
         }
       );
 
-      return response.data.answer;
+      return response.data;
     } catch (error) {
       console.error('Error calling Colab RAG service:', error.message);
       
@@ -155,13 +155,21 @@ Return as JSON object with field names as keys.
     };
 
     const lowerQuestion = question.toLowerCase();
+    let answer = 'I apologize, but the RAG service is currently unavailable. Please check your connection to the Colab service and try again.';
+    
     for (const [key, response] of Object.entries(fallbacks)) {
       if (lowerQuestion.includes(key)) {
-        return response;
+        answer = response;
+        break;
       }
     }
 
-    return 'I apologize, but the RAG service is currently unavailable. Please check your connection to the Colab service and try again.';
+    // Return the same structure as the real API
+    return {
+      answer: answer,
+      sources: [],
+      confidence: 0.0
+    };
   }
 
   generateFallbackAutofill(record, targetFields) {

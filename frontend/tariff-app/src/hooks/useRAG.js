@@ -1,27 +1,48 @@
 // frontend/src/hooks/useRAG.js
 import { useState } from 'react';
+import { ragService } from '../services/ragService';
 
 export const useRAG = () => {
   const [answer, setAnswer] = useState('');
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [sources, setSources] = useState([]);
+  const [confidence, setConfidence] = useState(null);
 
   const askQuestion = async (query, selectedCell) => {
     setLoading(true);
+    setError(null);
+    setAnswer('');
+    setSources([]);
+    setConfidence(null);
+    
     try {
-      // Mock response for now - replace with actual RAG API call
-      const mockAnswer = `This is a mock response to: "${query}" for the selected cell: ${selectedCell?.fieldName} = ${selectedCell?.value}`;
+      // Prepare the context from selected cell
+      const context = selectedCell ? `${selectedCell.fieldName}: ${selectedCell.value}` : "";
+
+      // Use the RAG service to make the API call
+      const data = await ragService.askQuestion(query, context);
       
-      // Simulate API delay
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Set the response data
+      setAnswer(data.answer || 'No answer received');
+      setSources(data.sources || []);
+      setConfidence(data.confidence || null);
       
-      setAnswer(mockAnswer);
     } catch (error) {
-      setAnswer('Error: Failed to get answer');
+      const errorMessage = error.message || 'Failed to get answer from RAG service';
+      setError({ message: errorMessage });
       console.error('RAG API error:', error);
     } finally {
       setLoading(false);
     }
   };
 
-  return { answer, loading, askQuestion };
+  return { 
+    answer, 
+    loading, 
+    error, 
+    sources, 
+    confidence, 
+    askQuestion 
+  };
 };

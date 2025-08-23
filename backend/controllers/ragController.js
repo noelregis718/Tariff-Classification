@@ -4,8 +4,15 @@ class RAGController {
   async askQuestion(req, res, next) {
     try {
       const { question, context } = req.body;
-      const answer = await ragService.askQuestion(question, context);
-      res.json({ answer });
+      const response = await ragService.askQuestion(question, context);
+      
+      // If the response is a string (just the answer), wrap it
+      if (typeof response === 'string') {
+        res.json({ answer: response });
+      } else {
+        // If it's already an object with answer, sources, confidence, etc.
+        res.json(response);
+      }
     } catch (error) {
       next(error);
     }

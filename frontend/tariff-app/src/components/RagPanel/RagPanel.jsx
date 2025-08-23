@@ -10,7 +10,7 @@ const RagPanel = ({
 }) => {
   const [question, setQuestion] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const { askQuestion, answer, loading, error } = useRAG();
+  const { askQuestion, answer, loading, error, sources, confidence } = useRAG();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,7 +21,7 @@ const RagPanel = ({
       // Create a contextual question based on the selected cell
       const contextualQuestion = `Regarding the ${selectedCell?.fieldName} field with value "${selectedCell?.value}": ${question}`;
       
-      await askQuestion(contextualQuestion);
+      await askQuestion(contextualQuestion, selectedCell);
       onQuestionSubmit && onQuestionSubmit(question, answer);
     } catch (error) {
       console.error('Failed to get answer:', error);
@@ -94,6 +94,33 @@ const RagPanel = ({
             <div className="answer-content">
               {answer}
             </div>
+            
+            {confidence !== null && (
+              <div className="confidence-info">
+                <strong>Confidence:</strong> {Math.round((confidence + 1) * 50)}%
+              </div>
+            )}
+            
+            {sources && sources.length > 0 && (
+              <div className="sources-section">
+                <h5>Sources:</h5>
+                <div className="sources-list">
+                  {sources.map((source, index) => (
+                    <div key={index} className="source-item">
+                      <div className="source-header">
+                        <strong>Part Number:</strong> {source.metadata?.part_number || 'N/A'}
+                        <span className="similarity-score">
+                          Similarity: {Math.round((source.similarity + 1) * 50)}%
+                        </span>
+                      </div>
+                      <div className="source-content">
+                        {source.content}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         )}
         
