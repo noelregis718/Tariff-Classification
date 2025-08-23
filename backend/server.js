@@ -1,15 +1,16 @@
 const express = require('express');
 const cors = require('cors');
-const dotenv = require('dotenv');
+const path = require('path');
 const airtableRoutes = require('./routes/airtable.js');
 const ragRoutes = require('./routes/rag.js');
 // const formsRoutes = require('./routes/forms.js');
 // const errorHandler = require('./middleware/errorHandler.js');
 
-dotenv.config('.env');
+// Load environment variables from the correct path
+require('dotenv').config('.env');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT ;
 
 // Middleware
 app.use(cors());

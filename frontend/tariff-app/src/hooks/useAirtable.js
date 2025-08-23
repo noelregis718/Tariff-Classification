@@ -10,13 +10,23 @@ export const useAirtable = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
+        console.log('🔄 Starting to fetch Airtable data...');
         setLoading(true);
+        console.log('📡 Calling airtableService.getRecords()...');
         const result = await airtableService.getRecords();
+        console.log('✅ Received data from service:', result);
         setData(result);
       } catch (err) {
+        console.error('❌ Error fetching Airtable data:', err);
+        console.error('Error details:', {
+          message: err.message,
+          stack: err.stack,
+          name: err.name
+        });
         setError(err);
       } finally {
         setLoading(false);
+        console.log('🏁 Fetch operation completed');
       }
     };
 

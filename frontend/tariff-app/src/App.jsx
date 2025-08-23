@@ -1,7 +1,7 @@
 // frontend/src/App.jsx
 import React, { useState } from 'react';
 import AirtableGrid from './components/AirtableGrid/AirtableGrid';
-import RAGPanel from './components/RagPanel/RagPanel';
+import RagPanel from './components/RagPanel/RagPanel';
 import FormsSelector from './components/FormsSelector/FormsSelector';
 import './App.css';
 
@@ -10,24 +10,50 @@ function App() {
   const [showRAGPanel, setShowRAGPanel] = useState(false);
   const [showFormsSelector, setShowFormsSelector] = useState(false);
 
+  const handleQuestionClick = (cellData) => {
+    setSelectedCell(cellData);
+    setShowRAGPanel(true);
+  };
+
+  const handleAutofillClick = (cellData) => {
+    console.log('Autofill requested for:', cellData);
+    // Implement autofill logic here
+    // This could call your RAG service to auto-populate related fields
+  };
+
+  const handleRAGPanelClose = () => {
+    setShowRAGPanel(false);
+    setSelectedCell(null);
+  };
+
+  const handleQuestionSubmit = (question, answer) => {
+    console.log('Question submitted:', question);
+    console.log('Answer received:', answer);
+    // You can implement additional logic here, like saving to a log
+  };
+
   return (
     <div className="app">
-      <div>
-        <h1>Tariff App</h1>
+      <div className="app-header">
+        <h1>Tariff Classification Assistant</h1>
+        <p>Interactive Airtable with AI-powered insights</p>
       </div>
+      
       <div className="main-content">
         <AirtableGrid 
           onCellSelect={setSelectedCell}
-          onQuestionClick={() => setShowRAGPanel(true)}
-          onAutofillClick={() => {/* handle autofill */}}
+          onQuestionClick={handleQuestionClick}
+          onAutofillClick={handleAutofillClick}
           onFormSelect={() => setShowFormsSelector(true)}
         />
       </div>
       
       {showRAGPanel && (
-        <RAGPanel 
+        <RagPanel 
+          isOpen={showRAGPanel}
           selectedCell={selectedCell}
-          onClose={() => setShowRAGPanel(false)}
+          onClose={handleRAGPanelClose}
+          onQuestionSubmit={handleQuestionSubmit}
         />
       )}
       

@@ -1,20 +1,34 @@
 // frontend/src/components/AirtableGrid/CellActions.jsx
 import React from 'react';
 
-const CellActions = ({ onQuestion, onAutofill }) => {
+const CellActions = ({ 
+  onQuestion, 
+  onAutofill, 
+  onSelect,
+  isVisible = false 
+}) => {
+  if (!isVisible) return null;
+
   return (
-    <div className="cell-actions">
+    <div className="cell-actions-overlay">
       <button 
+        onClick={onSelect} 
+        className="action-btn select-btn"
+        title="Select (Mark as reviewed)"
+      >
+        ✔
+      </button>
+      <button 
+        onClick={onQuestion} 
         className="action-btn question-btn"
-        onClick={onQuestion}
-        title="Ask question about this cell"
+        title="Question (Open RAG panel)"
       >
         ?
       </button>
       <button 
+        onClick={onAutofill} 
         className="action-btn autofill-btn"
-        onClick={onAutofill}
-        title="Auto-fill related cells"
+        title="Self-fill (Auto-populate fields)"
       >
         ↔
       </button>

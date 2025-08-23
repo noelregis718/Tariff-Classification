@@ -2,9 +2,27 @@ const AIRTABLE_API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:3001
 
 class AirtableService {
   async getRecords() {
-    const response = await fetch(`${AIRTABLE_API_BASE}/api/airtable/records`);
-    if (!response.ok) throw new Error('Failed to fetch records');
-    return response.json();
+    console.log('🌐 AirtableService: Making fetch request to:', `${AIRTABLE_API_BASE}/api/airtable/records`);
+    console.log('🌐 AirtableService: API Base URL:', AIRTABLE_API_BASE);
+    
+    try {
+      const response = await fetch(`${AIRTABLE_API_BASE}/api/airtable/records`);
+      console.log('📡 AirtableService: Response status:', response.status);
+      console.log('📡 AirtableService: Response ok:', response.ok);
+      
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('❌ AirtableService: Response not ok. Status:', response.status, 'Error:', errorText);
+        throw new Error(`Failed to fetch records: ${response.status} ${errorText}`);
+      }
+      
+      const data = await response.json();
+      console.log('✅ AirtableService: Successfully parsed response:', data);
+      return data;
+    } catch (error) {
+      console.error('❌ AirtableService: Fetch error:', error);
+      throw error;
+    }
   }
 
   async updateRecord(recordId, fields) {
