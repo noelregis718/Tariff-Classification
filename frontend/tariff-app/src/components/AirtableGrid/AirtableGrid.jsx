@@ -136,12 +136,12 @@ const AirtableGrid = ({ onCellSelect, onQuestionClick, onAutofillClick, onFormSe
       <div className="grid-header">
         <h2>Customs Classification Data</h2>
         <div className="header-actions">
-          <div className="toast-test-buttons">
+          {/* <div className="toast-test-buttons">
             <button onClick={() => testToast('success')} className="toast-test-btn success">Test Success</button>
             <button onClick={() => testToast('error')} className="toast-test-btn error">Test Error</button>
             <button onClick={() => testToast('warning')} className="toast-test-btn warning">Test Warning</button>
             <button onClick={() => testToast('info')} className="toast-test-btn info">Test Info</button>
-          </div>
+          </div> */}
           <button onClick={onFormSelect} className="forms-button">
             Generate Forms
           </button>
@@ -164,10 +164,6 @@ const AirtableGrid = ({ onCellSelect, onQuestionClick, onAutofillClick, onFormSe
         </div>
       )}
       
-      {/* Scroll indicator */}
-      <div className="scroll-indicator">
-        <span>↔️ Scroll horizontally to see all columns</span>
-      </div>
       
       <div className="grid-container">
         <table className="data-table">

@@ -536,12 +536,14 @@
 }
 
 .data-table td {
+  margin-top: 10px;
   padding: 8px;
   border-bottom: 1px solid #dee2e6;
   position: relative;
   cursor: pointer;
   transition: background-color 0.2s;
 }
+
 
 .data-table td:hover {
   background-color: #f8f9fa;
@@ -665,7 +667,7 @@
 /* Hover Actions Styles */
 .cell-actions-overlay {
   position: absolute;
-  top: -30px;
+  top: -10px;
   right: 0;
   background: white;
   border: 1px solid #dee2e6;
