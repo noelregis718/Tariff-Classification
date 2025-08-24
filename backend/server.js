@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const airtableRoutes = require('./routes/airtable.js');
 const ragRoutes = require('./routes/rag.js');
+const formsRoutes = require('./routes/form.js');
 // const formsRoutes = require('./routes/forms.js');
 // const errorHandler = require('./middleware/errorHandler.js');
 
@@ -19,6 +20,7 @@ app.use(express.json());
 // Routes
 app.use('/api/airtable', airtableRoutes);
 app.use('/api/rag', ragRoutes);
+app.use('/api/forms', formsRoutes);
 
 // // Error handling
 // app.use(errorHandler);
