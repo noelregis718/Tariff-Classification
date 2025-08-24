@@ -33,12 +33,11 @@ function App() {
   };
 
   return (
-    <>
+    <div>
       <ToastContainer />
       <div className="app">
         <div className="app-header">
           <h1>Tariff Classification Assistant</h1>
-          <p>Interactive Airtable with AI-powered insights</p>
         </div>
         
         <div className="main-content">
@@ -66,7 +65,7 @@ function App() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }
 
