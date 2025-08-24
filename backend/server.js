@@ -22,7 +22,7 @@ app.use('/filled_forms', express.static(path.join(__dirname, 'filled_forms')));
 app.get('/filled_forms/:formType/:fileName', (req, res) => {
   const { formType, fileName } = req.params;
   const filePath = path.join(__dirname, 'filled_forms', formType, fileName);
-  res.download(filePath); // Forces download with Content-Disposition: attachment
+  res.download(filePath); 
 });
 
 // Routes

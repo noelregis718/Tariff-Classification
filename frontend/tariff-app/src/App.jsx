@@ -18,8 +18,7 @@ function App() {
 
   const handleAutofillClick = (cellData) => {
     console.log('Autofill requested for:', cellData);
-    // Implement autofill logic here
-    // This could call your RAG service to auto-populate related fields
+    
   };
 
   const handleRAGPanelClose = () => {
