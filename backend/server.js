@@ -17,6 +17,14 @@ const PORT = process.env.PORT ;
 app.use(cors());
 app.use(express.json());
 
+// Serve filled_forms as static files
+app.use('/filled_forms', express.static(path.join(__dirname, 'filled_forms')));
+app.get('/filled_forms/:formType/:fileName', (req, res) => {
+  const { formType, fileName } = req.params;
+  const filePath = path.join(__dirname, 'filled_forms', formType, fileName);
+  res.download(filePath); // Forces download with Content-Disposition: attachment
+});
+
 // Routes
 app.use('/api/airtable', airtableRoutes);
 app.use('/api/rag', ragRoutes);

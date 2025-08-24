@@ -1,5 +1,5 @@
 // frontend/src/components/FormsSelector/FormsSelector.jsx
-import React from 'react';
+import React, { useState } from 'react';
 import { fillForm } from '../../services/formService';
 
 const FormsSelector = ({ selectedData, onClose }) => {
@@ -8,15 +8,16 @@ const FormsSelector = ({ selectedData, onClose }) => {
     'Form 7501'
   ];
 
+  const [formLinks, setFormLinks] = useState([]);
+  const [formMessage, setFormMessage] = useState('');
+
   const handleFormSelect = async (formName) => {
     const formType = formName.includes('3461') ? '3461' : '7501';
-    // Show loading toast
-    const toastId = window.showToast && window.showToast(`Filling ${formName}...`, 'info', 3000);
+    window.showToast && window.showToast(`Filling ${formName}...`, 'info', 3000);
     const response = await fillForm(formType);
-    // Show result toast
     window.showToast && window.showToast(response.message, response.files.length ? 'success' : 'error', 7000);
-    // Optionally, handle files (e.g., display links)
-    // You can add more UI for files if needed
+    setFormMessage(response.message);
+    setFormLinks(response.files || []);
   };
 
   return (
@@ -32,7 +33,7 @@ const FormsSelector = ({ selectedData, onClose }) => {
             <strong>Selected:</strong> {selectedData.fieldName} = {selectedData.value}
           </div>
         )}
-        
+
         <div className="forms-list">
           <h4>Available Forms:</h4>
           {forms.map((form, index) => (
@@ -45,6 +46,34 @@ const FormsSelector = ({ selectedData, onClose }) => {
             </button>
           ))}
         </div>
+
+        {formMessage && (
+          <div className="form-message">
+            <strong>{formMessage}</strong>
+          </div>
+        )}
+        {formLinks.length > 0 && (
+          <div className="form-links">
+            <h4>Filled Forms:</h4>
+            <ul>
+              {formLinks.map((file, idx) => {
+                // Convert local path to backend URL for download
+                const backendPrefix = '/Users/siddharth/VSCODE/tariff_classification/backend/filled_forms/';
+                let url = file;
+                if (file.startsWith(backendPrefix)) {
+                  url = 'http://localhost:3001/filled_forms/' + file.substring(backendPrefix.length);
+                }
+                return (
+                  <li key={idx}>
+                    <a href={url} download target="_blank" rel="noopener noreferrer">
+                      Download {file.split('/').pop()}
+                    </a>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
       </div>
     </div>
   );
