@@ -1,19 +1,22 @@
 // frontend/src/components/FormsSelector/FormsSelector.jsx
 import React from 'react';
+import { fillForm } from '../../services/formService';
 
 const FormsSelector = ({ selectedData, onClose }) => {
   const forms = [
-    'Customs Declaration Form',
-    'Import Permit',
-    'Certificate of Origin',
-    'Commercial Invoice',
-    'Packing List'
+    'Form 3461',
+    'Form 7501'
   ];
 
-  const handleFormSelect = (formName) => {
-    // Handle form generation logic here
-    console.log(`Generating ${formName} for:`, selectedData);
-    alert(`Form "${formName}" will be generated for the selected data.`);
+  const handleFormSelect = async (formName) => {
+    const formType = formName.includes('3461') ? '3461' : '7501';
+    // Show loading toast
+    const toastId = window.showToast && window.showToast(`Filling ${formName}...`, 'info', 3000);
+    const response = await fillForm(formType);
+    // Show result toast
+    window.showToast && window.showToast(response.message, response.files.length ? 'success' : 'error', 7000);
+    // Optionally, handle files (e.g., display links)
+    // You can add more UI for files if needed
   };
 
   return (
