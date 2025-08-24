@@ -1,8 +1,13 @@
 /* App.css */
+body,html{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .app {
   width: 100%;
+  height: max-content;
   margin-top: 0%;
-  /* padding: 20px; */
   font-family: Arial, sans-serif;
 }
 
