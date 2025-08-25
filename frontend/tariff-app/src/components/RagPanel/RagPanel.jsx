@@ -1,4 +1,3 @@
-// frontend/src/components/RagPanel/RagPanel.jsx
 import React, { useState } from 'react';
 import { useRAG } from '../../hooks/useRAG';
 
@@ -18,7 +17,6 @@ const RagPanel = ({
 
     setIsLoading(true);
     try {
-      // Create a contextual question based on the selected cell
       const contextualQuestion = `Regarding the ${selectedCell?.fieldName} field with value "${selectedCell?.value}": ${question}`;
       
       await askQuestion(contextualQuestion, selectedCell);
@@ -41,7 +39,7 @@ const RagPanel = ({
     <div className="rag-panel-overlay">
       <div className="rag-panel">
         <div className="rag-panel-header">
-          <h3>RAG Assistant</h3>
+          <h3>Tariff Assistant</h3>
           <button onClick={handleClose} className="close-btn">×</button>
         </div>
         

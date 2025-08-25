@@ -1,4 +1,3 @@
-// frontend/src/components/FormsSelector/FormsSelector.jsx
 import React, { useState } from 'react';
 import { fillForm } from '../../services/formService';
 

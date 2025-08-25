@@ -1,4 +1,3 @@
-// frontend/src/App.jsx
 import React, { useState } from 'react';
 import AirtableGrid from './components/AirtableGrid/AirtableGrid';
 import RagPanel from './components/RagPanel/RagPanel';

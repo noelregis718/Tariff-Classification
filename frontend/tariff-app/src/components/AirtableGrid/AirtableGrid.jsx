@@ -1,4 +1,3 @@
-// frontend/src/components/AirtableGrid/AirtableGrid.jsx
 import React, { useState } from 'react';
 import { useAirtable } from '../../hooks/useAirtable';
 import CellActions from './CellActions';
@@ -45,7 +44,7 @@ const AirtableGrid = ({ onCellSelect, onQuestionClick, onAutofillClick, onFormSe
       if (window.showToast) {
         window.showToast(`Failed to update cell: ${error.message || 'Unknown error'}`, 'error');
       }
-      throw error; // Re-throw to let EditableCell handle it
+      throw error; 
     }
   };
 
@@ -68,7 +67,7 @@ const AirtableGrid = ({ onCellSelect, onQuestionClick, onAutofillClick, onFormSe
   const handleSelect = (rowId, fieldName) => {
     try {
       console.log('Selected:', { rowId, fieldName });
-      // Implement your selection logic here
+      
     } catch (error) {
       console.error('Error handling selection:', error);
       if (window.showToast) {

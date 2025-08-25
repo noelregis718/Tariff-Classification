@@ -1,4 +1,4 @@
-// frontend/tariff-app/src/services/formService.js
+
 const baseUrl = import.meta.env.VITE_API_URL;
 export async function fillForm(formType) {
   const url = `${baseUrl}/api/forms/fill/${formType}`;
